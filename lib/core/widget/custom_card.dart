@@ -80,7 +80,7 @@ class CustomCard extends StatelessWidget {
                       customCardModel.overview,
                       maxLines: 3,
                       overflow: TextOverflow.ellipsis,
-                      style: AppTextStyle().menuStyle
+                      style: AppTextStyle().description
                     ),
                     const SizedBox(height: 10),
                     CustomButton(label: "ver", onTap: onTapButton)

@@ -2,16 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:yo_me_animo/core/model/movie_model.dart';
 import 'package:yo_me_animo/core/extension/extension.dart';
 import 'package:image_picker_loading_jm/image_picker_loading_jm.dart';
+import 'package:yo_me_animo/core/util/app_text_style.dart';
 
 class CardMovieWidget extends StatelessWidget {
   final MovieModel movie;
   final Function(MovieModel) onTapCard;
 
   const CardMovieWidget({
-    Key? key,
+    super.key,
     required this.movie,
     required this.onTapCard,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +46,8 @@ class CardMovieWidget extends StatelessWidget {
             child: Text(
               movie.title,
               maxLines: 2,
-              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w900),
+              overflow: TextOverflow.ellipsis,
+              style: AppTextStyle().buttonStyle,
             ),
           )
         ],

@@ -7,11 +7,11 @@ class ContainerWidget extends StatelessWidget {
   final TextAlign textAlign;
 
   const ContainerWidget({
-    Key? key,
+    super.key,
     required this.late,
     required this.style,
     this.textAlign = TextAlign.start,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

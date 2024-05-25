@@ -32,11 +32,7 @@ class AppNavigator {
   static NavigatorState get state => navigatorKey.currentState!;
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
-    MovieModel movieModel = MovieModel.init();
-
     dynamic argument = settings.arguments;
-
-    if (argument is MovieModel) movieModel = argument;
 
     switch (settings.name) {
       case _Page.home:

@@ -17,7 +17,8 @@ class DetailMovieCubit extends Cubit<DetailMovieState> {
   DetailMovieCubit({
     required GetListGenresUseCase getListGenresUseCase,
     required GetMovieListUseCase getMovieListUseCase,
-  })  : _getListGenresUseCase = getListGenresUseCase,
+  })
+      : _getListGenresUseCase = getListGenresUseCase,
         _getMovieListUseCase = getMovieListUseCase,
         super(DetailMovieState.init());
 
@@ -30,28 +31,30 @@ class DetailMovieCubit extends Cubit<DetailMovieState> {
   _getGenresList({required BuildContext context}) async {
     final result = await _getListGenresUseCase(NoParams());
     result.fold(
-      (dynamic l) => customSnackBar(context, content: l.code),
-      (r) async => emit(state.copyWith(genres: r)),
+          (dynamic l) => customSnackBar(context, content: l.code),
+          (r) async => emit(state.copyWith(genres: r)),
     );
   }
 
   _getMovieList({required BuildContext context}) async {
     final result = await _getMovieListUseCase(NoParams());
     result.fold(
-      (dynamic l) => customSnackBar(context, content: l.code),
-      (r) async {
-
-      emit(state.copyWith(movieList: r));
-      }
+            (dynamic l) => customSnackBar(context, content: l.code),
+            (r) async {
+          List<MovieModel> newList = r.toList();
+          newList.sort((a, b) => a.id.compareTo(b.id));
+          emit(state.copyWith(movieList: r, secondMovieList: newList));
+          }
     );
   }
 
-  String handledFindGenreName(int id) => state.genres
-      .firstWhere(
-        (element) => element.id == id,
+  String handledFindGenreName(int id) =>
+      state.genres
+          .firstWhere(
+            (element) => element.id == id,
         orElse: () => GenresModel.init(),
       )
-      .name;
+          .name;
 
   void onTapButton(MovieModel movie) =>
       AppNavigator.push(Routes.DETAIL_MOVIE, arguments: movie);
