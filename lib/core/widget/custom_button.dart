@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yo_me_animo/core/util/app_color.dart';
+import 'package:yo_me_animo/core/util/app_text_style.dart';
 
 enum CustomButtonEnum {
   enable,
@@ -12,31 +13,26 @@ class CustomButton extends StatelessWidget {
   final CustomButtonEnum state;
 
   const CustomButton({
-    Key? key,
+    super.key,
     required this.label,
     required this.onTap,
     this.state = CustomButtonEnum.enable,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return Material(
       elevation: 2,
-      borderRadius: BorderRadius.circular(40),
       color: _generateColor(),
+      shadowColor: AppColors.disable,
+      borderRadius: BorderRadius.circular(40),
       child: InkWell(
         onTap: onTap,
         borderRadius: BorderRadius.circular(40),
-        child:  Padding(
-          padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 50),
-          child: Text(
-            label,
-            style: const TextStyle(
-              fontSize: 17,
-              color: AppColors.primary,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
+        child: Container(
+          alignment: Alignment.center,
+          padding: const EdgeInsets.symmetric(vertical: 5),
+          child: Text(label, style: AppTextStyle().buttonStyle),
         ),
       ),
     );
@@ -45,7 +41,7 @@ class CustomButton extends StatelessWidget {
   Color _generateColor() {
     switch (state) {
       case CustomButtonEnum.enable:
-        return AppColors.second;
+        return AppColors.primary;
       case CustomButtonEnum.disable:
         return AppColors.disable;
     }

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:yo_me_animo/core/util/app_color.dart';
+import 'package:yo_me_animo/core/util/app_text_style.dart';
+import 'package:yo_me_animo/core/extension/context_extension.dart';
 
 class TitleCustom extends StatelessWidget {
   final String firstTitle;
@@ -7,11 +8,11 @@ class TitleCustom extends StatelessWidget {
   final CrossAxisAlignment? crossAxisAlignment;
 
   const TitleCustom({
-    Key? key,
+    super.key,
     this.crossAxisAlignment,
     required this.firstTitle,
     required this.secondTitle,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -20,32 +21,12 @@ class TitleCustom extends StatelessWidget {
       children: [
         Text(
           firstTitle,
-          style: const TextStyle(
-            fontSize: 25,
-            color: AppColors.white,
-            fontWeight: FontWeight.w800,
-            shadows: [
-              Shadow(
-                color: AppColors.primary,
-                offset: Offset(1, 1),
-              )
-            ],
-          ),
+          style: AppTextStyle().subTitle,
         ),
-        const SizedBox(height: 10),
+        SizedBox(height: context.sizeHeight(0.01)),
         Text(
           secondTitle,
-          style: const TextStyle(
-            fontSize: 15,
-            color: AppColors.disable,
-            fontWeight: FontWeight.w300,
-            shadows: [
-              Shadow(
-                color: AppColors.primary,
-                offset: Offset(1, 1),
-              )
-            ],
-          ),
+          style: AppTextStyle().title,
         ),
       ],
     );

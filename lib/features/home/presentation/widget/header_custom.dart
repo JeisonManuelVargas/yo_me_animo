@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:yo_me_animo/core/util/app_color.dart';
+import 'package:yo_me_animo/core/util/app_text_style.dart';
 import 'package:yo_me_animo/core/widget/custom_title.dart';
+import 'package:yo_me_animo/core/extension/context_extension.dart';
+import 'package:yo_me_animo/features/home/data/model/menu_type.dart';
 
 class HeaderCustom extends StatelessWidget {
   final String title;
   final String subTitle;
-  final Function(String) onTap;
+  final MenuType selected;
+  final Function(MenuType) onTap;
 
   const HeaderCustom({
-    Key? key,
-    required this.title,
+    super.key,
     required this.onTap,
+    required this.title,
     required this.subTitle,
-  }) : super(key: key);
+    required this.selected,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -23,14 +28,11 @@ class HeaderCustom extends StatelessWidget {
         bottomLeft: Radius.circular(40),
         bottomRight: Radius.circular(40),
       ),
-      child: Column(
+      child: ListView(
+        padding: EdgeInsets.symmetric(horizontal: context.sizeWidth(0.1)),
         children: [
+          SizedBox(height: context.sizeHeight(0.06)),
           Container(
-            margin: const EdgeInsets.only(
-              top: 50,
-              left: 50,
-              right: 50,
-            ),
             alignment: Alignment.centerLeft,
             child: TitleCustom(
               firstTitle: title,
@@ -40,8 +42,10 @@ class HeaderCustom extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              _generateTextButton(label: "All List"),
-              _generateTextButton(label: "Favorite List")
+              _generateTextButton(
+                  "Películas", Icons.house_outlined, MenuType.ALL_MOVIE),
+              _generateTextButton(
+                  "Mis favoritos", Icons.star_border, MenuType.FAVORITE)
             ],
           )
         ],
@@ -49,30 +53,36 @@ class HeaderCustom extends StatelessWidget {
     );
   }
 
-  _generateTextButton({required String label}) => Expanded(
-        child: InkWell(
-          onTap: () => onTap(label),
-          splashColor: AppColors.primary.withOpacity(0.1),
-          borderRadius: BorderRadius.circular(10),
-          child: Container(
-            margin: const EdgeInsets.symmetric(horizontal: 10),
-            padding: const EdgeInsets.symmetric(vertical: 20),
-            alignment: Alignment.center,
-            child: Text(
-              label,
-              style: const TextStyle(
-                fontSize: 20,
-                color: AppColors.white,
-                fontWeight: FontWeight.w600,
-                shadows: [
-                  Shadow(
-                    color: AppColors.primary,
-                    offset: Offset(1, 1),
-                  )
-                ],
+  _generateTextButton(String label, IconData icon, MenuType type) {
+    return Expanded(
+      child: InkWell(
+        onTap: () => onTap(type),
+        splashColor: AppColors.primary.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(10),
+        child: Container(
+          margin: const EdgeInsets.symmetric(horizontal: 10),
+          padding: const EdgeInsets.symmetric(vertical: 20),
+          alignment: Alignment.center,
+          child: Column(
+            children: [
+              Icon(
+                icon,
+                color: selected == type
+                    ? AppColors.yellow
+                    : AppColors.textButton,
               ),
-            ),
+              Text(
+                label,
+                style: AppTextStyle().menuStyle.copyWith(
+                  color: selected == type
+                      ? AppColors.yellow
+                      : AppColors.textButton,
+                ),
+              )
+            ],
           ),
         ),
-      );
+      ),
+    );
+  }
 }

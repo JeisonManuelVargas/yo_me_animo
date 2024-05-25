@@ -15,14 +15,14 @@ class CustomListView extends StatelessWidget {
   final Function(MovieModel) onTapButton;
 
   const CustomListView({
-    Key? key,
+    super.key,
     this.listKey,
     this.controller,
     required this.listMovie,
     required this.onTapCard,
     required this.isFavorite,
     required this.onTapButton,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

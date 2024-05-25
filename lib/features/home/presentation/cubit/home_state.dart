@@ -5,6 +5,7 @@ class HomeState {
   final int limit;
   final bool isLoading;
   final GlobalKey listCoinKey;
+  final MenuType itemMenuSelected;
   final List<MovieModel> movieList;
   final PageController pageController;
   final List<MovieModel> movieListFavorite;
@@ -18,6 +19,7 @@ class HomeState {
     required this.isLoading,
     required this.listCoinKey,
     required this.pageController,
+    required this.itemMenuSelected,
     required this.scrollController,
     required this.movieListFavorite,
     required this.scrollControllerFavorite,
@@ -31,6 +33,7 @@ class HomeState {
         movieListFavorite: [],
         listCoinKey: GlobalKey(),
         pageController: PageController(),
+        itemMenuSelected: MenuType.ALL_MOVIE,
         scrollController: ScrollController(),
         scrollControllerFavorite: ScrollController(),
       );
@@ -39,6 +42,7 @@ class HomeState {
     int? skip,
     int? limit,
     bool? isLoading,
+    MenuType? itemMenuSelected,
     List<MovieModel>? movieList,
     List<MovieModel>? movieListFavorite,
   }) =>
@@ -51,6 +55,7 @@ class HomeState {
         movieList: movieList ?? this.movieList,
         isLoading: isLoading ?? this.isLoading,
         scrollControllerFavorite: scrollControllerFavorite,
+        itemMenuSelected: itemMenuSelected ?? this.itemMenuSelected,
         movieListFavorite: movieListFavorite ?? this.movieListFavorite,
       );
 }

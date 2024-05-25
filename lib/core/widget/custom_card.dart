@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker_loading_jm/image_picker_loading_jm.dart';
+import 'package:yo_me_animo/core/extension/context_extension.dart';
 import 'package:yo_me_animo/core/util/app_color.dart';
+import 'package:yo_me_animo/core/util/app_text_style.dart';
 import 'package:yo_me_animo/core/widget/custom_button.dart';
 
 class CustomCardModel {
@@ -25,24 +27,24 @@ class CustomCard extends StatelessWidget {
   final CustomCardModel customCardModel;
 
   const CustomCard({
-    Key? key,
+    super.key,
     required this.onTap,
     required this.onTapButton,
     required this.customCardModel,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return Material(
-      elevation: 2,
-      color: AppColors.white,
+
+      color: AppColors.second,
       borderRadius: BorderRadius.circular(10),
       child: InkWell(
         onTap: onTap,
         borderRadius: BorderRadius.circular(10),
         splashColor: AppColors.second.withOpacity(0.5),
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -50,8 +52,8 @@ class CustomCard extends StatelessWidget {
                 imagePickerLoadingJModel: ImagePickerLoadingJModel(
                   image: customCardModel.image,
                   buildBody: (context, provider) => Container(
-                    height: 100,
-                    width: 120,
+                    height: context.sizeHeight(0.18),
+                    width: context.sizeWidth(0.33),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       image: DecorationImage(
@@ -72,20 +74,13 @@ class CustomCard extends StatelessWidget {
                       customCardModel.name,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                        fontSize: 17,
-                        color: AppColors.black,
-                        fontWeight: FontWeight.w700,
-                      ),
+                      style: AppTextStyle().buttonStyle,
                     ),
                     Text(
                       customCardModel.overview,
                       maxLines: 3,
                       overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                        color: AppColors.disable,
-                        fontWeight: FontWeight.w300,
-                      ),
+                      style: AppTextStyle().menuStyle
                     ),
                     const SizedBox(height: 10),
                     CustomButton(label: "ver", onTap: onTapButton)

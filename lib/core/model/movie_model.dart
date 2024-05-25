@@ -6,86 +6,86 @@ MovieModel movieModelFromJson(String str) =>
 String movieModelToJson(MovieModel data) => json.encode(data.toJson());
 
 class MovieModel {
-  bool adult;
-  String backdropPath;
-  List<int> genreIds;
   int id;
-  String originalLanguage;
-  String originalTitle;
+  bool adult;
+  bool video;
+  String title;
+  int voteCount;
   String overview;
   double popularity;
   String posterPath;
-  DateTime releaseDate;
-  String title;
-  bool video;
   double voteAverage;
-  int voteCount;
+  List<int> genreIds;
+  String backdropPath;
+  String originalTitle;
+  DateTime releaseDate;
+  String originalLanguage;
 
   MovieModel({
-    required this.adult,
-    required this.backdropPath,
-    required this.genreIds,
     required this.id,
-    required this.originalLanguage,
-    required this.originalTitle,
-    required this.overview,
-    required this.popularity,
-    required this.posterPath,
-    required this.releaseDate,
+    required this.adult,
     required this.title,
     required this.video,
-    required this.voteAverage,
+    required this.genreIds,
+    required this.overview,
     required this.voteCount,
+    required this.popularity,
+    required this.posterPath,
+    required this.voteAverage,
+    required this.releaseDate,
+    required this.backdropPath,
+    required this.originalTitle,
+    required this.originalLanguage,
   });
 
   MovieModel copyWith({
-    bool? adult,
-    String? backdropPath,
-    List<int>? genreIds,
     int? id,
-    String? originalLanguage,
-    String? originalTitle,
+    bool? video,
+    bool? adult,
+    String? title,
+    int? voteCount,
     String? overview,
     double? popularity,
     String? posterPath,
-    DateTime? releaseDate,
-    String? title,
-    bool? video,
     double? voteAverage,
-    int? voteCount,
+    List<int>? genreIds,
+    String? backdropPath,
+    DateTime? releaseDate,
+    String? originalTitle,
+    String? originalLanguage,
   }) =>
       MovieModel(
-        adult: adult ?? this.adult,
-        backdropPath: backdropPath ?? this.backdropPath,
-        genreIds: genreIds ?? this.genreIds,
         id: id ?? this.id,
-        originalLanguage: originalLanguage ?? this.originalLanguage,
-        originalTitle: originalTitle ?? this.originalTitle,
+        adult: adult ?? this.adult,
+        title: title ?? this.title,
+        video: video ?? this.video,
+        genreIds: genreIds ?? this.genreIds,
         overview: overview ?? this.overview,
+        voteCount: voteCount ?? this.voteCount,
         popularity: popularity ?? this.popularity,
         posterPath: posterPath ?? this.posterPath,
         releaseDate: releaseDate ?? this.releaseDate,
-        title: title ?? this.title,
-        video: video ?? this.video,
         voteAverage: voteAverage ?? this.voteAverage,
-        voteCount: voteCount ?? this.voteCount,
+        backdropPath: backdropPath ?? this.backdropPath,
+        originalTitle: originalTitle ?? this.originalTitle,
+        originalLanguage: originalLanguage ?? this.originalLanguage,
       );
 
   factory MovieModel.fromJson(Map<String, dynamic> json) => MovieModel(
-        adult: json["adult"],
-        backdropPath: json["backdrop_path"],
-        genreIds: List<int>.from(json["genre_ids"].map((x) => x)),
         id: json["id"],
-        originalLanguage: json["original_language"],
-        originalTitle: json["original_title"],
-        overview: json["overview"],
-        popularity: json["popularity"]?.toDouble(),
-        posterPath: json["poster_path"],
-        releaseDate: DateTime.parse(json["release_date"]),
         title: json["title"],
         video: json["video"],
-        voteAverage: json["vote_average"]?.toDouble(),
+        adult: json["adult"],
+        overview: json["overview"],
         voteCount: json["vote_count"],
+        posterPath: json["poster_path"],
+        backdropPath: json["backdrop_path"],
+        originalTitle: json["original_title"],
+        popularity: json["popularity"]?.toDouble(),
+        originalLanguage: json["original_language"],
+        voteAverage: json["vote_average"]?.toDouble(),
+        releaseDate: DateTime.parse(json["release_date"]),
+        genreIds: List<int>.from(json["genre_ids"].map((x) => x)),
       );
 
   factory MovieModel.init() => MovieModel(
@@ -106,20 +106,19 @@ class MovieModel {
       );
 
   Map<String, dynamic> toJson() => {
-        "adult": adult,
-        "backdrop_path": backdropPath,
-        "genre_ids": List<dynamic>.from(genreIds.map((x) => x)),
         "id": id,
-        "original_language": originalLanguage,
-        "original_title": originalTitle,
+        "title": title,
+        "adult": adult,
+        "video": video,
         "overview": overview,
+        "vote_count": voteCount,
         "popularity": popularity,
         "poster_path": posterPath,
-        "release_date":
-            "${releaseDate.year.toString().padLeft(4, '0')}-${releaseDate.month.toString().padLeft(2, '0')}-${releaseDate.day.toString().padLeft(2, '0')}",
-        "title": title,
-        "video": video,
         "vote_average": voteAverage,
-        "vote_count": voteCount,
+        "backdrop_path": backdropPath,
+        "original_title": originalTitle,
+        "original_language": originalLanguage,
+        "genre_ids": List<dynamic>.from(genreIds.map((x) => x)),
+        "release_date": "${releaseDate.year.toString().padLeft(4, '0')}-${releaseDate.month.toString().padLeft(2, '0')}-${releaseDate.day.toString().padLeft(2, '0')}",
       };
 }

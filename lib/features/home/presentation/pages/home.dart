@@ -25,16 +25,18 @@ class Home extends BasePage<HomeState, HomeCubit> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Flexible(
+                flex: 2,
                 fit: FlexFit.loose,
                 child: HeaderCustom(
-                  title: "Welcome",
-                  subTitle: "Jeison Manuel Vargas",
+                  title: "Bienvenido 🚀",
                   onTap: bloc.changeListView,
+                  subTitle: "Jeison Manuel Vargas",
+                  selected: state.itemMenuSelected,
                 ),
               ),
               Flexible(
+                flex: 5,
                 fit: FlexFit.loose,
-                flex: 3,
                 child: LoadingPage(
                   isLoading: state.isLoading,
                   child: PageView(

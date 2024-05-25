@@ -10,7 +10,7 @@ ScaffoldFeatureController customSnackBar(
     backgroundColor: isSuccess ? AppColors.second : AppColors.error,
     content: Text(
       content,
-      style: const TextStyle(color: AppColors.white, letterSpacing: 0.5),
+      style: const TextStyle(color: AppColors.textButton, letterSpacing: 0.5),
     ),
   ));
 }
