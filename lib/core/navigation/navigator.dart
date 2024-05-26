@@ -1,14 +1,13 @@
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
-import 'package:yo_me_animo/core/animations/fade_page_route.dart';
-import 'package:yo_me_animo/core/model/movie_model.dart';
 import 'package:yo_me_animo/core/model/user_model.dart';
-import 'package:yo_me_animo/features/detail_movie/data/model/detail_page_model.dart';
+import 'package:yo_me_animo/core/animations/fade_page_route.dart';
 import 'package:yo_me_animo/features/home/presentation/pages/home.dart';
-import 'package:yo_me_animo/features/detail_movie/presentation/page/detail_movie.dart';
 import 'package:yo_me_animo/features/login/presentation/page/login.dart';
 import 'package:yo_me_animo/features/register/presentation/page/register.dart';
+import 'package:yo_me_animo/features/detail_movie/data/model/detail_page_model.dart';
+import 'package:yo_me_animo/features/detail_movie/presentation/page/detail_movie.dart';
 
 enum Routes {
   HOME,
