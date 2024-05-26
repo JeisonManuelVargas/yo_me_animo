@@ -1,20 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:image_picker_loading_jm/image_picker_loading_jm.dart';
-import 'package:yo_me_animo/core/extension/context_extension.dart';
-import 'package:yo_me_animo/core/extension/extension.dart';
-import 'package:yo_me_animo/core/model/movie_model.dart';
+import 'package:yo_me_animo/core/model/user_model.dart';
 import 'package:yo_me_animo/core/util/app_color.dart';
+import 'package:yo_me_animo/core/model/movie_model.dart';
+import 'package:yo_me_animo/core/extension/extension.dart';
 import 'package:yo_me_animo/core/util/app_text_style.dart';
+import 'package:yo_me_animo/core/navigation/navigator.dart';
+import 'package:yo_me_animo/core/extension/context_extension.dart';
+import 'package:image_picker_loading_jm/image_picker_loading_jm.dart';
 
 class ScrollCuriousAppBar extends StatelessWidget {
+  final UserModel user;
   final MovieModel movie;
   final List<Widget> children;
   final ScrollController controller;
+  final Function(BuildContext, int) saveMovie;
 
   const ScrollCuriousAppBar({
     super.key,
+    required this.user,
     required this.movie,
     required this.children,
+    required this.saveMovie,
     required this.controller,
   });
 
@@ -28,6 +34,29 @@ class ScrollCuriousAppBar extends StatelessWidget {
           primary: true,
           titleSpacing: 0,
           forceElevated: true,
+          leading: const SizedBox(),
+          actions: [
+            Container(
+              padding:
+                  EdgeInsets.symmetric(horizontal: context.sizeWidth(0.02)),
+              width: context.sizeWidth(),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  IconButton(
+                    onPressed: () => AppNavigator.pop(),
+                    icon: const Icon(Icons.arrow_back_ios_new_outlined),
+                  ),
+                  IconButton(
+                    onPressed: () => saveMovie(context, movie.id),
+                    icon: user.favoriteMovies.contains(movie.id)
+                        ? const Icon(Icons.star, color: AppColors.yellow)
+                        : const Icon(Icons.star_border),
+                  )
+                ],
+              ),
+            )
+          ],
           excludeHeaderSemantics: true,
           automaticallyImplyLeading: true,
           backgroundColor: AppColors.second,
@@ -51,7 +80,6 @@ class ScrollCuriousAppBar extends StatelessWidget {
                     ),
                   ),
                 ),
-
                 Positioned(
                   top: 0,
                   left: 0,

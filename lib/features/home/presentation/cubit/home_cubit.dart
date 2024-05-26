@@ -6,6 +6,7 @@ import 'package:yo_me_animo/core/model/movie_model.dart';
 import 'package:yo_me_animo/core/navigation/navigator.dart';
 import 'package:yo_me_animo/core/util/custom_snack_bar.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:yo_me_animo/features/detail_movie/data/model/detail_page_model.dart';
 import 'package:yo_me_animo/features/home/data/model/menu_type.dart';
 import 'package:yo_me_animo/features/home/domain/usecases/get_coin_list_use_case.dart';
 import 'package:yo_me_animo/features/home/domain/usecases/remove_favorite_movie_use_case.dart';
@@ -113,8 +114,11 @@ class HomeCubit extends Cubit<HomeState> {
     emit(state.copyWith(isLoading: false));
   }
 
-  void onTapButton(MovieModel movie) =>
-      AppNavigator.push(Routes.DETAIL_MOVIE, arguments: movie);
+  void onTapButton(MovieModel movie) => AppNavigator.push(Routes.DETAIL_MOVIE,
+      arguments: DetailPageModel(
+        movie: movie,
+        userModel: state.user,
+      ));
 
   bool validateIsFavorite(MovieModel movie) =>
       state.user.favoriteMovies.contains(movie.id);

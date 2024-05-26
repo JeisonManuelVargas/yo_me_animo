@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:yo_me_animo/core/errors/failure.dart';
 import 'package:yo_me_animo/core/errors/exceptions.dart';
@@ -17,6 +18,16 @@ class DetailMovieRepositoryImpl implements DetailMovieRepository {
       return Right(result);
     } on DetailMovieException catch (e) {
       return Left(DetailMovieFailure(message: e.code));
+    }
+  }
+
+  @override
+  Future<Either<Failure, bool>> saveFavoriteMovie(DocumentReference userRef, int movieSelected) async {
+    try {
+      final result = await detailMovieDataSource.saveFavoriteMovie(userRef, movieSelected);
+      return Right(result);
+    } on HomeException catch (e) {
+      return Left(HomeFailure(message: e.code));
     }
   }
 }

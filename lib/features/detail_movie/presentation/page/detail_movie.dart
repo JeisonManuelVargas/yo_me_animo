@@ -6,6 +6,7 @@ import 'package:yo_me_animo/core/model/movie_model.dart';
 import 'package:yo_me_animo/core/util/app_text_style.dart';
 import 'package:yo_me_animo/core/extension/context_extension.dart';
 import 'package:yo_me_animo/core/widget/custom_animate_container.dart';
+import 'package:yo_me_animo/features/detail_movie/data/model/detail_page_model.dart';
 import 'package:yo_me_animo/features/detail_movie/presentation/widget/carousel_widget.dart';
 import 'package:yo_me_animo/features/detail_movie/presentation/cubit/detail_movie_cubit.dart';
 import 'package:yo_me_animo/features/detail_movie/presentation/widget/card_movie_widget.dart';
@@ -14,23 +15,22 @@ import 'package:yo_me_animo/features/detail_movie/presentation/widget/relevant_d
 import 'package:yo_me_animo/features/detail_movie/presentation/widget/scroll_curious_app_bar.dart';
 
 class DetailMovie extends BasePage<DetailMovieState, DetailMovieCubit> {
-  final MovieModel movie;
+  final DetailPageModel detailPageModel;
 
-  const DetailMovie({super.key, required this.movie});
+  const DetailMovie({super.key, required this.detailPageModel});
 
   @override
-  DetailMovieCubit createBloc(BuildContext context) => sl<DetailMovieCubit>()
-    ..init(
-      context,
-      movie: movie,
-    );
+  DetailMovieCubit createBloc(BuildContext context) =>
+      sl<DetailMovieCubit>()..init(context, detailPageModel: detailPageModel);
 
   @override
   Widget buildPage(BuildContext context, state, bloc) {
     return Scaffold(
       body: ScrollCuriousAppBar(
+        user: state.user,
         movie: state.movie,
         controller: state.controller,
+        saveMovie: bloc.saveFavoriteMovie,
         children: [
           SizedBox(height: context.sizeHeight(0.01)),
           ContainerWidget(

@@ -6,6 +6,7 @@ import 'package:yo_me_animo/core/services/abstract_api.dart';
 
 abstract class DetailMovieDataSource {
   Future<List<GenresModel>> getListGenres();
+  Future<bool> saveFavoriteMovie(DocumentReference userRef, int movieSelected);
 }
 
 class DetailMovieDataSourceImpl implements DetailMovieDataSource {
@@ -24,5 +25,11 @@ class DetailMovieDataSourceImpl implements DetailMovieDataSource {
     } catch (e) {
       throw DetailMovieException(code: 'Error al cargar datos desde la API');
     }
+  }
+
+  @override
+  Future<bool> saveFavoriteMovie(DocumentReference userRef, int movieSelected) async {
+    await userRef.update({"favorite_movies": FieldValue.arrayUnion([movieSelected])});
+    return true;
   }
 }

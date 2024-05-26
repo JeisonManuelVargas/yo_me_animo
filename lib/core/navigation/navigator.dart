@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:yo_me_animo/core/animations/fade_page_route.dart';
 import 'package:yo_me_animo/core/model/movie_model.dart';
 import 'package:yo_me_animo/core/model/user_model.dart';
+import 'package:yo_me_animo/features/detail_movie/data/model/detail_page_model.dart';
 import 'package:yo_me_animo/features/home/presentation/pages/home.dart';
 import 'package:yo_me_animo/features/detail_movie/presentation/page/detail_movie.dart';
 import 'package:yo_me_animo/features/login/presentation/page/login.dart';
@@ -41,10 +42,10 @@ class AppNavigator {
     dynamic argument = settings.arguments;
 
     late UserModel user;
-    late MovieModel movie;
+    late DetailPageModel detailPageModel;
 
     if(argument is UserModel) user = argument;
-    if(argument is MovieModel) movie = argument;
+    if(argument is DetailPageModel) detailPageModel = argument;
 
 
 
@@ -56,7 +57,7 @@ class AppNavigator {
       case _Page.login:
         return _pageRoute(page: const Login(), settings: settings);
       case _Page.detailMovie:
-        return _pageRoute(page: DetailMovie(movie: movie), settings: settings);
+        return _pageRoute(page: DetailMovie(detailPageModel: detailPageModel), settings: settings);
       default:
         return _pageRoute(page: const Login(), settings: settings);
     }
