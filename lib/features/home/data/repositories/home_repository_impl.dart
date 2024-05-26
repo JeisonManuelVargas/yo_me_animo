@@ -16,7 +16,7 @@ class HomeRepositoryImpl implements HomeRepository {
       final result = await homeDataSource.getListMovies();
       return Right(result);
     } on HomeException catch (e) {
-      return Left(HomeFailure(code: e.code));
+      return Left(HomeFailure(message: e.code));
     }
   }
 }

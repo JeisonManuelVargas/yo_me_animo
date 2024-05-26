@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yo_me_animo/core/model/user_model.dart';
 import 'package:yo_me_animo/injection_container.dart';
 import 'package:yo_me_animo/core/base/base_page.dart';
 import 'package:yo_me_animo/features/home/presentation/cubit/home_cubit.dart';
@@ -7,10 +8,16 @@ import 'package:yo_me_animo/features/home/presentation/widget/header_custom.dart
 import 'package:yo_me_animo/features/home/presentation/widget/custom_list_view.dart';
 
 class Home extends BasePage<HomeState, HomeCubit> {
-  const Home({super.key});
+  final UserModel user;
+
+  const Home({super.key, required this.user});
 
   @override
-  HomeCubit createBloc(BuildContext context) => sl<HomeCubit>()..init(context);
+  HomeCubit createBloc(BuildContext context) => sl<HomeCubit>()
+    ..init(
+      context,
+      user,
+    );
 
   @override
   Widget buildPage(BuildContext context, state, bloc) {

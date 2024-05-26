@@ -1,13 +1,31 @@
-abstract class Failure {}
+abstract class Failure {
+  late String message;
+}
 
 class DetailMovieFailure implements Failure {
-  final String code;
+  @override
+  String message;
 
-  DetailMovieFailure({required this.code});
+  DetailMovieFailure({this.message = ""});
 }
 
 class HomeFailure implements Failure {
-  final String code;
+  @override
+  String message;
 
-  HomeFailure({required this.code});
+  HomeFailure({this.message = ""});
+}
+
+class RegisterFailure implements Failure {
+  @override
+  String message;
+
+  RegisterFailure({this.message = ""});
+}
+
+class LoginFailure implements Failure {
+  @override
+  String message;
+
+  LoginFailure({this.message = ""});
 }

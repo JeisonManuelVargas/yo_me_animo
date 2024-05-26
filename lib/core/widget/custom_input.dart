@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:yo_me_animo/core/util/app_color.dart';
+import 'package:yo_me_animo/core/util/app_text_style.dart';
 
 class CustomInput extends StatefulWidget {
   final String label;
@@ -36,17 +38,18 @@ class _CustomInputState extends State<CustomInput> {
       duration: const Duration(milliseconds: 400),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        color: isActive ? Colors.white38 : Colors.transparent,
+        color: isActive ? Colors.white38 : AppColors.primary,
       ),
       child: TextFormField(
         focusNode: _myFocusNode,
         validator: widget.validation,
         controller: widget.controller,
-        style: const TextStyle(color: Colors.white),
+        style: AppTextStyle().buttonStyle,
         decoration: InputDecoration(
           labelText: widget.label,
           prefixIcon: Icon(widget.icon),
-          hintStyle: const TextStyle(color: Colors.white),
+          hintStyle: AppTextStyle().buttonStyle,
+          labelStyle: AppTextStyle().buttonStyle,
         ),
       ),
     );

@@ -3,23 +3,29 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:yo_me_animo/core/animations/fade_page_route.dart';
 import 'package:yo_me_animo/core/model/movie_model.dart';
-import 'package:yo_me_animo/features/detail_movie/presentation/page/detail_movie.dart';
+import 'package:yo_me_animo/core/model/user_model.dart';
 import 'package:yo_me_animo/features/home/presentation/pages/home.dart';
+import 'package:yo_me_animo/features/detail_movie/presentation/page/detail_movie.dart';
+import 'package:yo_me_animo/features/login/presentation/page/login.dart';
+import 'package:yo_me_animo/features/register/presentation/page/register.dart';
 
 enum Routes {
   HOME,
-  SPLASH,
+  LOGIN,
+  REGISTER,
   DETAIL_MOVIE,
 }
 
 class _Page {
   static const String home = '/home';
-  static const String splash = '/splash';
+  static const String login = '/login';
+  static const String register = '/register';
   static const String detailMovie = '/detailMovie';
 
   static const Map<Routes, String> _pageMap = {
     Routes.HOME: home,
-    Routes.SPLASH: splash,
+    Routes.LOGIN: login,
+    Routes.REGISTER: register,
     Routes.DETAIL_MOVIE: detailMovie,
   };
 
@@ -34,22 +40,25 @@ class AppNavigator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     dynamic argument = settings.arguments;
 
+    late UserModel user;
+    late MovieModel movie;
+
+    if(argument is UserModel) user = argument;
+    if(argument is MovieModel) movie = argument;
+
+
+
     switch (settings.name) {
       case _Page.home:
-        return _pageRoute(
-          page: const Home(),
-          settings: settings,
-        );
+        return _pageRoute(page: Home(user: user), settings: settings);
+      case _Page.register:
+        return _pageRoute(page: const Register(), settings: settings);
+      case _Page.login:
+        return _pageRoute(page: const Login(), settings: settings);
       case _Page.detailMovie:
-        return _pageRoute(
-          page: DetailMovie(movie: argument),
-          settings: settings,
-        );
+        return _pageRoute(page: DetailMovie(movie: movie), settings: settings);
       default:
-        return _pageRoute(
-          page: const Home(),
-          settings: settings,
-        );
+        return _pageRoute(page: const Login(), settings: settings);
     }
   }
 

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:yo_me_animo/core/base/base_usecase.dart';
 import 'package:yo_me_animo/core/model/movie_model.dart';
+import 'package:yo_me_animo/core/model/user_model.dart';
 import 'package:yo_me_animo/core/navigation/navigator.dart';
 import 'package:yo_me_animo/core/util/custom_snack_bar.dart';
 import 'package:yo_me_animo/features/home/data/model/menu_type.dart';
@@ -18,9 +19,10 @@ class HomeCubit extends Cubit<HomeState> {
   })  : _getMovieListUseCase = getCoinListUseCase,
         super(HomeState.init());
 
-  init(BuildContext context) {
+  init(BuildContext context, UserModel user) {
     FlutterNativeSplash.remove();
     getMovieList(context: context);
+    emit(state.copyWith(user: user));
   }
 
   getMovieList({required BuildContext context}) async {

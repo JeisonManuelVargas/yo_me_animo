@@ -16,7 +16,7 @@ class DetailMovieRepositoryImpl implements DetailMovieRepository {
       final result = await detailMovieDataSource.getListGenres();
       return Right(result);
     } on DetailMovieException catch (e) {
-      return Left(DetailMovieFailure(code: e.code));
+      return Left(DetailMovieFailure(message: e.code));
     }
   }
 }

@@ -4,6 +4,7 @@ class HomeState {
   final int skip;
   final int limit;
   final bool isLoading;
+  final UserModel user;
   final GlobalKey listCoinKey;
   final MenuType itemMenuSelected;
   final List<MovieModel> movieList;
@@ -14,6 +15,7 @@ class HomeState {
 
   const HomeState({
     required this.skip,
+    required this.user,
     required this.limit,
     required this.movieList,
     required this.isLoading,
@@ -31,6 +33,7 @@ class HomeState {
         movieList: [],
         isLoading: false,
         movieListFavorite: [],
+        user: UserModel.init(),
         listCoinKey: GlobalKey(),
         pageController: PageController(),
         itemMenuSelected: MenuType.ALL_MOVIE,
@@ -41,12 +44,14 @@ class HomeState {
   HomeState copyWith({
     int? skip,
     int? limit,
+    UserModel? user,
     bool? isLoading,
     MenuType? itemMenuSelected,
     List<MovieModel>? movieList,
     List<MovieModel>? movieListFavorite,
   }) =>
       HomeState(
+        user: user ?? this.user,
         skip: skip ?? this.skip,
         listCoinKey: listCoinKey,
         limit: limit ?? this.limit,

@@ -11,11 +11,13 @@ class CustomButton extends StatelessWidget {
   final String label;
   final Function() onTap;
   final CustomButtonEnum state;
+  final double? verticalPadding;
 
   const CustomButton({
     super.key,
     required this.label,
     required this.onTap,
+    this.verticalPadding,
     this.state = CustomButtonEnum.enable,
   });
 
@@ -24,14 +26,13 @@ class CustomButton extends StatelessWidget {
     return Material(
       elevation: 2,
       color: _generateColor(),
-      shadowColor: AppColors.disable,
-      borderRadius: BorderRadius.circular(40),
+      borderRadius: BorderRadius.circular(20),
       child: InkWell(
         onTap: onTap,
-        borderRadius: BorderRadius.circular(40),
+        borderRadius: BorderRadius.circular(20),
         child: Container(
           alignment: Alignment.center,
-          padding: const EdgeInsets.symmetric(vertical: 5),
+          padding: EdgeInsets.symmetric(vertical: verticalPadding??5),
           child: Text(label, style: AppTextStyle().buttonStyle),
         ),
       ),
