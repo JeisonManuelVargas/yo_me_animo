@@ -9,7 +9,6 @@ class HomeState {
   final MenuType itemMenuSelected;
   final List<MovieModel> movieList;
   final PageController pageController;
-  final List<MovieModel> movieListFavorite;
   final ScrollController scrollController;
   final ScrollController scrollControllerFavorite;
 
@@ -23,7 +22,6 @@ class HomeState {
     required this.pageController,
     required this.itemMenuSelected,
     required this.scrollController,
-    required this.movieListFavorite,
     required this.scrollControllerFavorite,
   });
 
@@ -32,7 +30,6 @@ class HomeState {
         limit: 10,
         movieList: [],
         isLoading: false,
-        movieListFavorite: [],
         user: UserModel.init(),
         listCoinKey: GlobalKey(),
         pageController: PageController(),
@@ -48,7 +45,6 @@ class HomeState {
     bool? isLoading,
     MenuType? itemMenuSelected,
     List<MovieModel>? movieList,
-    List<MovieModel>? movieListFavorite,
   }) =>
       HomeState(
         user: user ?? this.user,
@@ -61,6 +57,5 @@ class HomeState {
         isLoading: isLoading ?? this.isLoading,
         scrollControllerFavorite: scrollControllerFavorite,
         itemMenuSelected: itemMenuSelected ?? this.itemMenuSelected,
-        movieListFavorite: movieListFavorite ?? this.movieListFavorite,
       );
 }

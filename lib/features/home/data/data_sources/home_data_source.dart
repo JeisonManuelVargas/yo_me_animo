@@ -6,6 +6,8 @@ import 'package:yo_me_animo/core/services/abstract_api.dart';
 
 abstract class HomeDataSource {
   Future<List<MovieModel>> getListMovies();
+  Future<bool> removeFavoriteMovie(DocumentReference userRef, int movieSelected);
+  Future<bool> saveFavoriteMovie(DocumentReference userRef, int movieSelected);
 }
 
 class HomeDataSourceImpl implements HomeDataSource {
@@ -26,5 +28,14 @@ class HomeDataSourceImpl implements HomeDataSource {
     }
   }
 
-
+  @override
+  Future<bool> saveFavoriteMovie(DocumentReference userRef, int movieSelected) async {
+    await userRef.update({"favorite_movies": FieldValue.arrayUnion([movieSelected])});
+    return true;
+  }
+  @override
+  Future<bool> removeFavoriteMovie(DocumentReference userRef, int movieSelected) async {
+    await userRef.update({"favorite_movies": FieldValue.arrayRemove([movieSelected])});
+    return true;
+  }
 }

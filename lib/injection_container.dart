@@ -1,6 +1,8 @@
 import 'package:get_it/get_it.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:yo_me_animo/features/home/domain/usecases/remove_favorite_movie_use_case.dart';
+import 'package:yo_me_animo/features/home/domain/usecases/save_favorite_movie_use_case.dart';
 import 'package:yo_me_animo/features/home/presentation/cubit/home_cubit.dart';
 import 'package:yo_me_animo/features/home/data/data_sources/home_data_source.dart';
 import 'package:yo_me_animo/features/login/data/data_sources/login_data_source.dart';
@@ -29,14 +31,20 @@ final sl = GetIt.instance;
 Future<void> init() async {
   sl
     //cubit
-    ..registerFactory<HomeCubit>(() => HomeCubit(getCoinListUseCase: sl()))
     ..registerFactory<DetailMovieCubit>(() => DetailMovieCubit(getMovieListUseCase: sl(), getListGenresUseCase: sl(),))
     ..registerFactory<LoginCubit>(() => LoginCubit(getDataUserUseCase: sl(), validateUserWithEmailAndPasswordUseCase: sl()))
     ..registerFactory<RegisterCubit>(() => RegisterCubit(createDataUserUseCase: sl(), createUserWithEmailAndPasswordUseCase: sl()))
+    ..registerFactory<HomeCubit>(() => HomeCubit(getCoinListUseCase: sl(), removeFavoriteMovieUseCase: sl(), saveFavoriteMovieUseCase: sl()))
 
     //user Case
     ..registerFactory<ValidateUserWithEmailAndPasswordUseCase>(
       () => ValidateUserWithEmailAndPasswordUseCase(loginRepository: sl()),
+    )
+    ..registerFactory<RemoveFavoriteMovieUseCase>(
+      () => RemoveFavoriteMovieUseCase(homeRepository: sl()),
+    )
+    ..registerFactory<SaveFavoriteMovieUseCase>(
+      () => SaveFavoriteMovieUseCase(homeRepository: sl()),
     )
     ..registerFactory<GetDataUserUseCase>(
       () => GetDataUserUseCase(loginRepository: sl()),

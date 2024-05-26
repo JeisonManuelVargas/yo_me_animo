@@ -11,8 +11,8 @@ class CustomListView extends StatelessWidget {
   final IsFavorite isFavorite;
   final List<MovieModel> listMovie;
   final ScrollController? controller;
-  final Function(MovieModel) onTapCard;
   final Function(MovieModel) onTapButton;
+  final Function(BuildContext, MovieModel) onTapCard;
 
   const CustomListView({
     super.key,
@@ -35,7 +35,7 @@ class CustomListView extends StatelessWidget {
             itemBuilder: (context, index) => Padding(
               padding: const EdgeInsets.symmetric(vertical: 10),
               child: CustomCard(
-                onTap: () => onTapCard(listMovie[index]),
+                onTap: () => onTapCard(context, listMovie[index]),
                 onTapButton: () => onTapButton(listMovie[index]),
                 customCardModel: CustomCardModel(
                   name: listMovie[index].title,

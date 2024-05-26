@@ -60,9 +60,9 @@ class Home extends BasePage<HomeState, HomeCubit> {
                       CustomListView(
                         onTapCard: bloc.onTapCard,
                         onTapButton: bloc.onTapButton,
-                        listMovie: state.movieListFavorite,
                         isFavorite: bloc.validateIsFavorite,
                         controller: state.scrollControllerFavorite,
+                        listMovie: state.movieList.where((element) => state.user.favoriteMovies.contains(element.id)).toList(),
                       ),
                     ],
                   ),

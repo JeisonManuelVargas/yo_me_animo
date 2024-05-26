@@ -47,6 +47,7 @@ class RegisterCubit extends Cubit<RegisterState> {
     final result = await _createDataUserUseCase(CreateDataUserUseCaseParams(
       id: id,
       userModel: UserModel(
+        favoriteMovies: [],
         name: state.nameController.text,
         email: state.emailController.text,
       ),
