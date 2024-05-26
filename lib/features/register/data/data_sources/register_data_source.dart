@@ -43,6 +43,6 @@ class RegisterDataSourceImpl implements RegisterDataSource {
   }) async {
     final reference = db.collection(userCollection).doc(id);
     reference.set(userModel.toJson());
-    return userModel;
+    return userModel.copyWith(id: reference);
   }
 }

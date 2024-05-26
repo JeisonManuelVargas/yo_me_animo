@@ -84,34 +84,30 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   _saveFavoriteMovie(BuildContext context, int movieRef) async {
-    emit(state.copyWith(isLoading: true));
-    final result =
-        await _saveFavoriteMovieUseCase(SaveFavoriteMovieUseCaseParam(
+    final result = await _saveFavoriteMovieUseCase(SaveFavoriteMovieUseCaseParam(
       userRef: state.user.id!,
       movieRef: movieRef,
     ));
 
-    result.fold((dynamic l) {
-      emit(state.copyWith(isLoading: false));
-      customSnackBar(context, content: l.code);
-    }, (r) async => state.user.favoriteMovies.add(movieRef));
-    emit(state.copyWith(isLoading: false));
+    result.fold((dynamic l) => customSnackBar(context, content: l.code),
+        (r) async {
+      state.user.favoriteMovies.add(movieRef);
+      emit(state.copyWith());
+    });
   }
 
   _removeFavoriteMovie(BuildContext context, int movieRef) async {
-    emit(state.copyWith(isLoading: true));
     final result =
         await _removeFavoriteMovieUseCase(RemoveFavoriteMovieUseCaseParam(
       userRef: state.user.id!,
       movieRef: movieRef,
     ));
 
-    result.fold((dynamic l) {
-      emit(state.copyWith(isLoading: false));
-      customSnackBar(context, content: l.code);
-    }, (r) async => state.user.favoriteMovies.remove(movieRef));
-
-    emit(state.copyWith(isLoading: false));
+    result.fold((dynamic l) => customSnackBar(context, content: l.code),
+        (r) async {
+      state.user.favoriteMovies.remove(movieRef);
+      emit(state.copyWith());
+    });
   }
 
   void onTapButton(MovieModel movie) => AppNavigator.push(Routes.DETAIL_MOVIE,

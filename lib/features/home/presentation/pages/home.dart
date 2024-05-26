@@ -50,7 +50,6 @@ class Home extends BasePage<HomeState, HomeCubit> {
                     controller: state.pageController,
                     children: [
                       CustomListView(
-                        key: state.listCoinKey,
                         onTapCard: bloc.onTapCard,
                         listMovie: state.movieList,
                         onTapButton: bloc.onTapButton,
@@ -59,6 +58,7 @@ class Home extends BasePage<HomeState, HomeCubit> {
                       ),
                       CustomListView(
                         onTapCard: bloc.onTapCard,
+                        listKey: state.listCoinKey,
                         onTapButton: bloc.onTapButton,
                         isFavorite: bloc.validateIsFavorite,
                         controller: state.scrollControllerFavorite,
