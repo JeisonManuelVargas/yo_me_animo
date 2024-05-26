@@ -47,7 +47,7 @@ class Login extends BasePage<LoginState, LoginCubit> {
           state.isLoading
               ? const Center(child: CircularProgressIndicator())
               : CustomButton(
-                  label: "Registrarte",
+                  label: "Iniciar",
                   verticalPadding: 10,
                   onTap: () => bloc.validateUser(context),
                 ),
@@ -55,7 +55,7 @@ class Login extends BasePage<LoginState, LoginCubit> {
           InkWell(
             onTap: bloc.goToRegister,
             child: Text(
-              "Ya tengo una cuenta",
+              "No tengo una cuenta",
               textAlign: TextAlign.center,
               style: AppTextStyle().buttonStyle,
             ),

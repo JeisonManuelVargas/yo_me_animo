@@ -25,4 +25,6 @@ class HomeDataSourceImpl implements HomeDataSource {
       throw HomeException(code: 'Error al cargar datos desde la API');
     }
   }
+
+
 }

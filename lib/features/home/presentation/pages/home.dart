@@ -37,7 +37,7 @@ class Home extends BasePage<HomeState, HomeCubit> {
                 child: HeaderCustom(
                   title: "Bienvenido 🚀",
                   onTap: bloc.changeListView,
-                  subTitle: "Jeison Manuel Vargas",
+                  subTitle: state.user.name,
                   selected: state.itemMenuSelected,
                 ),
               ),
